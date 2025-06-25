@@ -1,5 +1,6 @@
 import {
   Controller,
+  Inject,
   Get,
   Post,
   Body,
@@ -11,9 +12,14 @@ import { Res } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import {CatService} from '../cat/cat.service'
 
 @Controller('users')
 export class UsersController {
+  // 基于属性的注入的 cat
+  @Inject()
+  private catsService: CatService;
+
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
@@ -23,8 +29,8 @@ export class UsersController {
 
   @Get()
   findAll() {
-    console.log(Reflect.getMetadata('path', UsersController)); // 输出 'users'
-    return this.usersService.findAll();
+    return this.catsService.findAll()
+    // return this.usersService.findAll();
   }
 
   @Get(':id')
