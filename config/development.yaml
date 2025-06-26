@@ -1,8 +1,0 @@
-db:
-  mysql:
-    host: 172.21.192.129
-    database: xsyx_log_service_web
-    username: log_service_web
-    password: yUVrR.68
-    port: 3306
-
