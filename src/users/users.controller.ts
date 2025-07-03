@@ -12,7 +12,7 @@ import { Res } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import {CatService} from '../cat/cat.service'
+import { CatService } from '../cat/cat.service';
 
 @Controller('users')
 export class UsersController {
@@ -29,7 +29,7 @@ export class UsersController {
 
   @Get()
   findAll() {
-    return this.catsService.findAll()
+    return this.catsService.findAll();
     // return this.usersService.findAll();
   }
 

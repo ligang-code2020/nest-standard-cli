@@ -20,6 +20,8 @@ export class ResponseInterceptor<T> implements NestInterceptor<T, Response<T>> {
   ): Observable<Response<T>> {
     const request = context.switchToHttp().getRequest<Request>();
     const response = context.switchToHttp().getResponse<Response<T>>();
+    console.log('ResponseInterceptor');
+    
 
     // 将POST默认httpCode(201)改为200
     // if (request.method === 'POST') {
