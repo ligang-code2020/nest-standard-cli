@@ -12,6 +12,7 @@ import { jwtConstants } from '../../common/constants/auth.constants';
     UsersModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
+      global: true,
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '6h' },
     }),
