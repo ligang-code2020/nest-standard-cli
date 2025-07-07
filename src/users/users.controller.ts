@@ -7,6 +7,7 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { Res } from '@nestjs/common';
 import { UsersService } from './users.service';
@@ -34,7 +35,8 @@ export class UsersController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    console.log('id', id);
     return this.usersService.findOne(+id);
   }
 
