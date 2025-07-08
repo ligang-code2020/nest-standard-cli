@@ -7,21 +7,30 @@ import {
   Patch,
   Param,
   Delete,
-  ParseIntPipe,
+  UseInterceptors,
+  Query,
 } from '@nestjs/common';
 import { Res } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { CatService } from '../cat/cat.service';
+import { SkipAuth } from '../auth/decorators/skip-auth.decorator';
+import { LoginDto } from './dto/login.dto';
+import { AuthService } from '../auth/auth.service';
+import { LoggingInterceptor } from '../../common/interceptors/logging.interceptors';
 
+@UseInterceptors(LoggingInterceptor)
 @Controller('users')
 export class UsersController {
   // 基于属性的注入的 cat
   @Inject()
   private catsService: CatService;
 
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -34,10 +43,18 @@ export class UsersController {
     // return this.usersService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    console.log('id', id);
-    return this.usersService.findOne(+id);
+  @Get('findOne')
+  @SkipAuth()
+  findOne(@Query('username') username: string) {
+
+
+    return this.usersService.findOne(username);
+  }
+
+  @SkipAuth()
+  @Post('login')
+  async login(@Body() loginDto: LoginDto) {
+    return this.authService.validateUser(loginDto.username, loginDto.password);
   }
 
   @Patch(':id')

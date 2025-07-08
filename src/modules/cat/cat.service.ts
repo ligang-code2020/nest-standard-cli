@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SharedService } from '../shared/shared.service';
+import { SharedService } from '../../shared/shared.service';
 import { CreateCatDto } from './dto/create-cat.dto';
 
 @Injectable()

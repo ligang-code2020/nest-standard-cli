@@ -21,7 +21,6 @@ export class IsRepeatIdentifierId implements ValidatorConstraintInterface {
     const identifierIndexMap = new Map();
     for (let i = 0; i < args.length; i++) {
       const identifier = args[i].identifier;
-      console.log('identifier', identifier);
 
       if (identifierIndexMap.has(identifier)) {
         this.repeatIdentifier = identifier;
@@ -40,8 +39,6 @@ export class IsRepeatIdentifierId implements ValidatorConstraintInterface {
 }
 
 export function IsIdentifierRepeat(validationOptions?: ValidationOptions) {
-  console.log(2323);
-
   return function (object: Object, propertyName: string) {
     registerDecorator({
       target: object.constructor,
