@@ -21,7 +21,7 @@ export class AuthService {
       const salt = COMMON_SALT;
       // 通过密码盐，加密传参，再与数据库里的比较，判断是否相等
       const hashPassword = encryptPassword(password, salt);
-      console.log(hashPassword);
+
       
       if (hashedPassword === hashPassword) {
         const payload = { username: user.username };
