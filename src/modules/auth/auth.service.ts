@@ -22,7 +22,6 @@ export class AuthService {
       // 通过密码盐，加密传参，再与数据库里的比较，判断是否相等
       const hashPassword = encryptPassword(password, salt);
 
-      
       if (hashedPassword === hashPassword) {
         const payload = { username: user.username };
         const token = await this.jwtService.signAsync(payload, {
