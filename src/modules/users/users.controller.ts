@@ -19,6 +19,7 @@ import { SkipAuth } from '../auth/decorators/skip-auth.decorator';
 import { LoginDto } from './dto/login.dto';
 import { AuthService } from '../auth/auth.service';
 import { LoggingInterceptor } from '../../common/interceptors/logging.interceptors';
+import { TimeoutInterceptor } from 'src/common/interceptors/timeout.interceptor';
 
 @UseInterceptors(LoggingInterceptor)
 @Controller('users')
@@ -38,6 +39,8 @@ export class UsersController {
   }
 
   @Get()
+  @SkipAuth()
+  @UseInterceptors(TimeoutInterceptor)
   findAll() {
     return this.catsService.findAll();
     // return this.usersService.findAll();
@@ -46,8 +49,6 @@ export class UsersController {
   @Get('findOne')
   @SkipAuth()
   findOne(@Query('username') username: string) {
-
-
     return this.usersService.findOne(username);
   }
 
