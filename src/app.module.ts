@@ -10,6 +10,7 @@ import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './modules/auth/jwt-auth.guard';
 import { AuthModule } from './modules/auth/auth.module';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AuthModule } from './modules/auth/auth.module';
       isGlobal: true,
     }),
     UsersModule,
+    DatabaseModule,
     CatModule,
     SharedModule,
     AuthModule,
