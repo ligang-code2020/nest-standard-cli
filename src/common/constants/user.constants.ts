@@ -1,10 +1,10 @@
-export interface User {
+export interface UserInterface {
   userId: number;
   username: string;
   password: string;
   passwordHash: string;
 }
-export const userList: User[] = [
+export const userList: UserInterface[] = [
   {
     userId: 1,
     username: 'john',

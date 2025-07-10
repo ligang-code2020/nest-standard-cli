@@ -42,8 +42,8 @@ export class UsersController {
   @SkipAuth()
   @UseInterceptors(TimeoutInterceptor)
   findAll() {
-    return this.catsService.findAll();
-    // return this.usersService.findAll();
+    // return this.catsService.findAll();
+    return this.usersService.findAll();
   }
 
   @Get('findOne')

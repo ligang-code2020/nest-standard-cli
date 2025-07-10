@@ -3,6 +3,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { databaseProviders } from './database.providers';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DatabaseConnectionCheckService } from './service/database.connection-check.service';
+import { User } from '../modules/users/models/user.model';
 
 @Global() // 标记为全局模块，其他模块无需重复导入
 @Module({
@@ -32,7 +33,7 @@ import { DatabaseConnectionCheckService } from './service/database.connection-ch
           },
         },
         timezone: '+08:00',
-        models: [],
+        models: [User],
       }),
     }),
     // 多个数据库
