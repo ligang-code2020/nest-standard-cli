@@ -1,73 +1,97 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Nest Standard CLI 项目
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 项目简介
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+该项目是基于 NestJS 框架的基础功能封装，旨在提供一个标准化的项目架构，方便快速开发和扩展。项目包含了常用的模块和功能实现，适合中小型后端服务的开发。
 
-## Description
+## 项目架构
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### 1. 模块化设计
+项目采用模块化设计，每个功能模块独立封装，便于维护和扩展。主要模块包括：
+- **UsersModule**: 用户管理模块，包含用户的增删改查和登录功能。
+- **CatModule**: 示例模块，展示模块间的依赖和功能封装。
+- **AuthModule**: 认证模块，支持 JWT 和本地策略认证。
+- **DatabaseModule**: 数据库模块，封装了 Sequelize ORM 的配置和连接。
+- **SharedModule**: 公共模块，提供共享服务和工具。
+- **AppModule**: 应用主模块，负责整合所有模块。
 
-## Installation
+### 2. 全局功能
+- **全局管道**: 使用 `ValidationPipe` 进行参数校验和转换。
+- **全局过滤器**: 捕获所有异常并统一处理。
+- **全局拦截器**: 处理正常返回数据的格式化。
+- **全局守卫**: 使用 `AuthGuard` 进行权限认证。
 
-```bash
-$ npm install
+### 3. 数据库支持
+- 使用 Sequelize ORM 连接 MySQL 数据库。
+- 支持多数据库配置（当前仅启用了一个数据库连接）。
+- 数据库模型定义在各模块中，便于模块化管理。
+
+### 4. 中间件
+- **LoggerMiddleware**: 日志中间件，用于记录请求信息。
+
+### 5. 依赖注入
+- 使用 NestJS 的依赖注入机制，支持基于构造函数和属性的注入。
+
+### 6. 认证与授权
+- 支持 JWT 认证，配置了过期时间为 6 小时。
+- 提供 `SkipAuth` 装饰器，用于跳过认证检查。
+
+### 7. 单元测试
+- 使用 `@nestjs/testing` 提供的工具进行模块和控制器的单元测试。
+
+## 项目功能
+
+### 用户管理模块
+- 用户的增删改查功能。
+- 用户登录功能，支持用户名和密码验证。
+
+### 示例模块 (CatModule)
+- 提供简单的增删改查功能，展示模块间依赖的使用。
+
+### 认证模块
+- 支持 JWT 和本地策略认证。
+- 提供用户登录验证功能。
+
+### 数据库模块
+- 封装了 MySQL 数据库的连接和配置。
+- 支持模型定义和同步。
+
+### 公共模块
+- 提供共享服务，例如日志记录和工具函数。
+
+### 全局功能
+- 参数校验、异常捕获、数据格式化等。
+
+## 启动项目
+
+1. 安装依赖：
+   ```bash
+   npm install
+   ```
+
+2. 启动服务：
+   ```bash
+   npm run start
+   ```
+
+3. 访问服务：
+   ```
+   http://localhost:3000
+   ```
+
+## 项目结构
+
+```
+src/
+├── app.module.ts          # 应用主模块
+├── main.ts                # 应用入口文件
+├── common/                # 公共功能（拦截器、过滤器、中间件等）
+├── database/              # 数据库模块
+├── modules/               # 功能模块
+│   ├── users/             # 用户模块
+│   ├── cat/               # 示例模块
+│   ├── auth/              # 认证模块
+├── shared/                # 公共模块
 ```
 
-## Running the app
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
